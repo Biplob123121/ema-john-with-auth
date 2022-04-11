@@ -29,10 +29,13 @@
     height: 35px;
     margin-left: 20px;
     font-size: 20px;
-    background-color: rgb(233, 200, 157);
+    background-color: rgba(216, 145, 53, 0.568);
     border: none;
     border-radius: 10px;
     cursor: pointer;
+}
+.form-submit:hover{
+    background-color: rgba(216, 145, 53, 0.9);
 }
 #signup-link{
     text-decoration: none;

@@ -11,7 +11,9 @@
 
 6. 
 
+7. install react firebase hooks : npm install --save react-firebase-hooks
 
+8. useCreateUserWithEmailAndPassword from react firbase hooks github 
 
 
 

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import auth from '../../firebase.init';
 import './Login.css';
 
@@ -13,23 +13,25 @@ const Login = () => {
         user,
         loading,
         error
-      ] = useSignInWithEmailAndPassword(auth);
+    ] = useSignInWithEmailAndPassword(auth);
 
-      const navigate = useNavigate();
+    const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || "/";
 
-    const hanleEmailBlur = event =>{
+    const hanleEmailBlur = event => {
         setEmail(event.target.value);
     }
 
-    const handlePasswordBlur = event =>{
+    const handlePasswordBlur = event => {
         setPassord(event.target.value);
     }
 
-    if(user){
-        navigate('/shop');
+    if (user) {
+        navigate(from, {replace: true});
     }
 
-    const handleSignIn = event =>{
+    const handleSignIn = event => {
         event.preventDefault();
 
         signInWithEmailAndPassword(email, password);
@@ -42,11 +44,11 @@ const Login = () => {
                 <form onSubmit={handleSignIn}>
                     <div className="input-group">
                         <label htmlFor="email">Email</label>
-                        <input onBlur={hanleEmailBlur} type="email" name='email'  required/>
+                        <input onBlur={hanleEmailBlur} type="email" name='email' required />
                     </div>
                     <div className="input-group">
                         <label htmlFor="password">Password</label>
-                        <input onBlur={handlePasswordBlur} type="password" name='password' required/>
+                        <input onBlur={handlePasswordBlur} type="password" name='password' required />
                     </div>
                     <p>{error?.message}</p>
                     {
